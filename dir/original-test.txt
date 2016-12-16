@@ -1,3 +1,3 @@
 I am a text file in the dir/ directory
 
-I have been edited 1 times.
+I have been edited 2 times.
