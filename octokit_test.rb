@@ -56,7 +56,7 @@ new_tree_sha = octokit.create_tree(
   base_tree: base_tree_sha
 ).sha
 
-# Commit to master on GitHub
+# Commit to new branch on GitHub
 commit_message = "Commit via Octokit! (Edit ##{edit_count})"
 new_commit_sha = octokit.create_commit(
   repo,
@@ -64,4 +64,14 @@ new_commit_sha = octokit.create_commit(
   new_tree_sha,
   latest_commit_sha
 ).sha
-updated_master_ref = octokit.update_ref(repo, master_ref, new_commit_sha)
+new_branch_ref = "heads/edit-#{edit_count}"
+octokit.create_ref(repo, new_branch_ref, new_commit_sha)
+
+# Submit a pull request
+octokit.create_pull_request(
+  repo,
+  'master',
+  "edit-#{edit_count}",
+  "Edit ##{edit_count}",
+  "Edit ##{edit_count}, submitted by running octokit.rb"
+)
