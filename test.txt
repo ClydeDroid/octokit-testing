@@ -1,0 +1,3 @@
+I am a test text file in the base directory.
+
+I have been edited 0 times.
